@@ -1,0 +1,174 @@
+# -*- coding: utf-8 -*-
+ScreenManager:
+    id: screen_manager
+    MainWindow:
+        id: main
+        name: 'main'
+        manager: screen_manager
+    SecondWindow:
+        id: second
+        name: 'second'
+        manager: screen_manager
+
+    EzyWindow:
+        id: Ezy
+        name: 'Ezy'
+        manager: screen_manager
+    QWEWindow:
+        id: qwe
+        name: 'qwe'
+        manager: screen_manager
+    MultiWindow:
+        id: multiplication
+        name: 'multiplication'
+        manager: screen_manager
+    EndWindow:
+        id: end
+        name: 'end'
+        manager: screen_manager
+        qw: multiplication.text
+        s: multiplication.text2
+
+<MainWindow>:
+
+    FloatLayout:
+
+        BoxLayout:
+            orientation: "vertical"
+            Label:
+                text:"Game"
+                font_size: 60
+            Button:
+                background_color: 0, 0, 0, 0
+                text:"GO!"
+                font_size: 40
+                on_release:
+                    root.manager.transition.direction = 'left'
+                    root.manager.current="second"
+
+<SecondWindow>:
+
+    BoxLayout:
+        orientation: "vertical"
+        Button:
+            text:"Game"
+            size_hint_y:0.2
+        GridLayout:
+            size_hint:0.5,0.6
+            cols: 2
+            CheckBox:
+            Label:
+                text:"Game"
+            CheckBox:
+            Label:
+                text:"Game"
+            CheckBox:
+            Label:
+                text:"Game"
+            CheckBox:
+            Label:
+                text:"Game"
+            CheckBox:
+            Label:
+                text:"Game"
+            CheckBox:
+            Label:
+                text:"Game"
+        AnchorLayout:
+            size_hint_y:0.2
+            anchor_x:"right"
+            anchor_y:"bottom"
+            Button:
+                size_hint:0.34,0.55
+                text:"Go!"
+                on_release:
+                    root.manager.current="Ezy"
+
+<EzyWindow>
+
+    r1c1:root.get_rang()
+    r1c2:root.get_rang()
+    r2c1:root.get()
+
+    sum:int(root.r1c1)+int(root.r1c2)
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text:"Правильный ли ответ?"
+
+        Label:
+            text:root.r1c1+" + "+root.r1c2
+        Label:
+            text:str(root.sum+int(root.r2c1))
+        BoxLayout:
+
+            Button:
+                text: "Yes!"
+                on_release:
+                    root.upda()
+            Button:
+                text: "No!"
+                on_release:
+                    root.upd()
+
+<QWEWindow>:
+    r1c1:root.get_rang()
+    r1c2:root.get_rang()
+    r2c1:root.get()
+    int:root.int
+    sum:int(root.r1c1)+int(root.r1c2)
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text:"Правильный ли ответ?"
+
+        Label:
+            text:root.r1c1+" + "+root.r1c2
+        Label:
+            text:str(root.sum+int(root.r2c1))
+        BoxLayout:
+
+            Button:
+                text: "Yes!"
+                on_release:
+                    root.upda()
+            Button:
+                text: "No!"
+                on_release:
+                    root.upd()
+<MultiWindow>
+    r1c1:root.get_rang()
+    r1c2:root.get_rang()
+    r2c1:root.get()
+    int:root.int
+    sum:int(root.r1c1)*int(root.r1c2)
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text:"Правильный ли ответ?"
+
+        Label:
+            text:root.r1c1+" * "+root.r1c2
+        Label:
+            text:str(root.sum+int(root.r2c1))
+        BoxLayout:
+
+            Button:
+                text: "Yes!"
+                on_release:
+                    root.upda()
+            Button:
+                text: "No!"
+                on_release:
+                    root.upd()
+<EndWindow>
+
+    BoxLayout:
+        orientation:"vertical"
+        Label:
+            text:"Молодец, хороший результат!!!"
+        BoxLayout:
+            Label:
+                text:root.qw
+            Label:
+                text: root.s
